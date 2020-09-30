@@ -1,0 +1,40 @@
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AlertifyService } from '../../_services/alertify.service';
+import { User } from '../../_models/user';
+import { NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-member-edit',
+  templateUrl: './member-edit.component.html',
+  styleUrls: ['./member-edit.component.css']
+})
+export class MemberEditComponent implements OnInit {
+  user: User;
+  @ViewChild('editForm',{static:true}) editForm: NgForm;
+
+  //prevent the users from leaving the page before they have the opportunity to save the changes
+  @HostListener('window:beforeunload',['$event'])
+  unloadNotification($event: any){
+    if(this.editForm.dirty){
+      $event.returnValue = true;
+    }
+
+  }
+
+  constructor(private route: ActivatedRoute,private alertify: AlertifyService) { }
+
+  ngOnInit(): void {
+
+    this.route.data.subscribe(data => {
+      this.user = data['user'];
+    });
+  }
+
+  updateUser(){
+    console.log(this.user);
+    this.alertify.success('Profile updated successfully');
+    this.editForm.reset(this.user);
+  }
+
+}
