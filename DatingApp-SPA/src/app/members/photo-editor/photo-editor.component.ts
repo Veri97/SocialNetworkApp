@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output,OnInit } from '@angular/core';
 import { Photo } from '../../_models/photo';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from '../../../environments/environment';
@@ -17,6 +17,7 @@ export class PhotoEditorComponent implements OnInit {
   component as an Input property*/
 
   @Input() photos: Photo[];
+  @Output() getMemberPhotoChange = new EventEmitter<string>();
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
@@ -75,6 +76,9 @@ export class PhotoEditorComponent implements OnInit {
             this.currentMainPhoto = this.photos.filter(p=>p.isMain === true)[0];
             this.currentMainPhoto.isMain = false;
             photo.isMain = true;
+            this.authService.changeMemberPhoto(photo.url);
+            this.authService.currentUser.photoUrl = photo.url;
+            localStorage.setItem('user',JSON.stringify(this.authService.currentUser));
         },
         error =>{
             this.alertify.error(error);
