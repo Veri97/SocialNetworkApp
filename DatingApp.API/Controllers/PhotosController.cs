@@ -148,7 +148,7 @@ namespace DatingApp.API.Controllers
             var photoFromRepo = await _repo.GetPhoto(id);
 
             if (photoFromRepo.IsMain)
-                return BadRequest("Ypu cannot delete the main photo!");
+                return BadRequest("You cannot delete the main photo!");
 
             if (photoFromRepo.PublicId != null)
             {
