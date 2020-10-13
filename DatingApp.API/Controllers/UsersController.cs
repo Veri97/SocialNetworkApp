@@ -21,7 +21,7 @@ namespace DatingApp.API.Controllers
     {
         private readonly IDatingRepository _repo;
 
-        public IMapper _mapper { get; }
+        public readonly IMapper _mapper;
 
         public UsersController(IDatingRepository repo, IMapper mapper)
         {
