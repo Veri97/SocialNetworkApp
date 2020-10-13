@@ -15,15 +15,16 @@
                     <strong>Age:</strong>
                     <p>{{user.age}}</p>
                    </div>
-                   <div>
+                   <!--Display Last active field only when a user views the details of another user in member list -->
+                   <div *ngIf="user.username != authService.decodedToken.unique_name">
                     <strong>Last active:</strong>
-                    <p>{{user.lastActive}}</p>
+                    <p>{{user.lastActive | timeago | timeAgoSecondsPipe}}</p>
                    </div>
                    <div>
                     <strong>Member since:</strong>
-                    <p>{{user.created}}</p>
+                    <p>{{user.created | date: 'mediumDate'}}</p>
                    </div>
-               </div>
+               </div> 
                <div class="card-footer">
                 <div class="btn-group d-flex">
                    <button class="btn btn-primary w-100">Like</button>

@@ -22,13 +22,13 @@
                     <strong>Age:</strong>
                     <p>{{user.age}}</p>
                    </div>
-                   <div>
+                   <div *ngIf="user.username != authService.decodedToken.unique_name">
                     <strong>Last active:</strong>
-                    <p>{{user.lastActive}}</p>
+                    <p>{{user.lastActive | timeago | timeAgoSecondsPipe}}</p>
                    </div>
-                   <div>
+                   <div> 
                     <strong>Member since:</strong>
-                    <p>{{user.created}}</p>
+                    <p>{{user.created | date: 'mediumDate'}}</p>
                    </div>
                </div>
                <div class="card-footer">

@@ -4,6 +4,7 @@ import { User } from '../../_models/user';
 import { AlertifyService } from '../../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery-9';
+import { AuthService } from '../../_services/auth.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -18,7 +19,8 @@ export class MemberDetailComponent implements OnInit {
 
   constructor(private userService: UserService,
               private alertify: AlertifyService,
-              private route: ActivatedRoute) 
+              private route: ActivatedRoute,
+              public authService: AuthService) 
   { }
 
   ngOnInit(): void {
