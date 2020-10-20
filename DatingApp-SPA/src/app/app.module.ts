@@ -12,6 +12,7 @@ import { NgxGalleryModule } from 'ngx-gallery-9';
 import { FileUploadModule } from 'ng2-file-upload';
 import {TimeagoModule} from 'ngx-timeago';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
+import {ButtonsModule} from 'ngx-bootstrap/buttons';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -68,6 +69,7 @@ export function tokenGetter(){
     FileUploadModule,
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ButtonsModule.forRoot(),
     TimeagoModule.forRoot(),
     TabsModule.forRoot(),
     PaginationModule.forRoot(),
