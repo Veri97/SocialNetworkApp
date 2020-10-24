@@ -36,6 +36,7 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import {TimeAgoSecondsPipe} from './_pipes/timeAgoSecondsPipe.pipe';
+import { ListsResolver } from './_resolvers/lists.resolver';
 
 
 
@@ -91,7 +92,8 @@ export function tokenGetter(){
     UserService,
     MemberDetailResolver,
     MemberListResolver,
-    MemberEditResolver
+    MemberEditResolver,
+    ListsResolver
   ],
   bootstrap: [AppComponent]
 })
