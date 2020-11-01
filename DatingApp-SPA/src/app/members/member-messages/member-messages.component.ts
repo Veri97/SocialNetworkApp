@@ -12,13 +12,14 @@ import { Message } from '../../_models/message';
 export class MemberMessagesComponent implements OnInit {
   @Input() recipientId: number;
   messages: Message[];
+  newMessage: any = {};
 
   constructor(private userService: UserService,
               private authService: AuthService,
               private alertify: AlertifyService) { }
 
   ngOnInit() {
-    this.loadMessages();
+    this.loadMessages(); 
   }
 
   loadMessages(){
@@ -29,6 +30,18 @@ export class MemberMessagesComponent implements OnInit {
      error=>{
        this.alertify.error(error);
      })
+  }
+
+  sendMessage(){
+    this.newMessage.recipientId = this.recipientId;
+    this.userService.sendMessage(this.authService.decodedToken.nameid,this.newMessage)
+        .subscribe((message: Message) => {
+          this.messages.unshift(message);
+          this.newMessage.content = '';
+        },
+        error=>{
+          this.alertify.error(error);
+        });
   }
 
 }

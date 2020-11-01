@@ -1,12 +1,12 @@
 <div class="card">
   <div class="card-body">
-    <div *ngIf="messages.length === 0">
+    <div *ngIf="messages?.length === 0">
        <p>No messages yet... say hi by using the message box below</p>
     </div>
 
     <ul class="chat">
        <li *ngFor="let message of messages">
-         <!-- To them -->
+         <!-- From them -->
          <div *ngIf="message.senderId == recipientId">
            <span class="chat-img float-left">
              <img src="{{message.senderPhotoUrl}}" alt="{{message.senderKnownAs}}" class="rounded-circle">
@@ -22,7 +22,7 @@
            </div>
          </div>
 
-         <!-- To me-->
+         <!-- From me-->
          <div *ngIf="message.senderId != recipientId">
           <span class="chat-img float-right">
             <img src="{{message.senderPhotoUrl}}" alt="{{message.senderKnownAs}}" class="rounded-circle">
@@ -30,7 +30,7 @@
           <div class="chat-body">
             <div class="header">
               <small class="text-muted">
-                <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
+                <span class="fa fa-clock-o">{{message.messageSent | timeago | timeAgoSecondsPipe}}</span>
                 <span *ngIf="!message.isRead" class="text-danger">(unread)</span>
                 <span *ngIf="message.isRead" class="text-success">(Read {{message.dateRead | timeago}})</span>
               </small>
@@ -44,11 +44,16 @@
   </div>
 
   <div class="card-footer">
-    <form action="">
+    <form #messageForm="ngForm" (ngSubmit)="messageForm.valid && sendMessage()">
       <div class="input-group">
-        <input type="text" class="form-control input-sm" placeholder="send a private message">
+        <input type="text"
+        [(ngModel)]="newMessage.content"
+        name="content"
+        required  
+        class="form-control input-sm"
+        placeholder="send a private message">
         <div class="input-group-append">
-          <button class="btn btn-primary">Send</button>
+          <button class="btn btn-primary" [disabled]="!messageForm.valid">Send</button>
         </div>
       </div>  
 
