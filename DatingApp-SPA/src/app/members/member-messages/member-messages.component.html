@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <div *ngIf="messages?.length === 0">
+    <div *ngIf="messages.length === 0">
        <p>No messages yet... say hi by using the message box below</p>
     </div>
 
@@ -32,7 +32,7 @@
               <small class="text-muted">
                 <span class="fa fa-clock-o">{{message.messageSent | timeago | timeAgoSecondsPipe}}</span>
                 <span *ngIf="!message.isRead" class="text-danger">(unread)</span>
-                <span *ngIf="message.isRead" class="text-success">(Read {{message.dateRead | timeago}})</span>
+                <span *ngIf="message.isRead" class="text-success">(Read {{message.dateRead | timeago | timeAgoSecondsPipe}})</span>
               </small>
               <strong class="primary-font float-right">{{message.senderKnownAs}}</strong>
             </div>
