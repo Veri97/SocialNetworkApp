@@ -96,9 +96,15 @@ namespace DatingApp.API
 
             app.UseAuthorization();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
+                //everything that is not an API controller, will fallback to the controller specified here
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }

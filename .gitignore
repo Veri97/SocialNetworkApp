@@ -9,6 +9,7 @@ bin
 obj
 *.db
 appsettings.json
+wwwroot
 
 # User-specific files
 *.rsuser
