@@ -65,13 +65,13 @@ export class MemberDetailComponent implements OnInit {
     this.memberTabs.tabs[tabId].active = true;
   }
 
-  /*
-   loadUser(){
-     this.userService.getUser(+this.route.snapshot.params['id'])
-                      .subscribe((user: User)=>{
-                        this.user = user;
-                      },error =>{
-                        this.alertify.error(error);
-                      });
-   }*/
+  sendLike(recipientId: number){
+    this.userService.sendLike(this.authService.decodedToken.nameid,recipientId)
+       .subscribe(data => {
+         this.alertify.success("You have liked "+this.user.knownAs);
+       },
+       error=>{
+         this.alertify.error(error);
+       })
+  }
 }
